@@ -1,10 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import SchedulerApp from "./components/SchedulerApp";
 
-createRoot(document.getElementById('root')!).render(
+import QueryClientProvider from "./QueryClientProvider";
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <QueryClientProvider>
+      <SchedulerApp />
+    </QueryClientProvider>
+  </StrictMode>
+);
