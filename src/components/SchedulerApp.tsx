@@ -32,6 +32,7 @@ import { ChangeSet, AppointmentModel } from "@devexpress/dx-react-scheduler";
 
 import useToggle from "../hooks/useToggle";
 import { getCurrentDate } from "../utils/getCurrentDate";
+import { removeUndefined } from "../utils/removeUndefined";
 import { startDayHour, endDayHour } from "../constants/common";
 
 function SchedulerApp() {
@@ -88,7 +89,7 @@ function SchedulerApp() {
     if (changed) {
       updateMutation.mutate({
         id: changed.id!,
-        changes: changed as Partial<CommonTypes.AppointmentI>,
+        changes: removeUndefined(changed as Partial<CommonTypes.AppointmentI>),
       });
     }
     if (deleted !== undefined) {

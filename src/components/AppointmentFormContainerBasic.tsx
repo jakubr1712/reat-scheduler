@@ -49,10 +49,9 @@ function AppointmentFormContainerBasic({
       ...appointmentData,
       ...appointmentChanges,
     };
+
     if (type === CommitAppointmentType.Deleted) {
       commitChanges({ [type]: appointment.id! });
-    } else if (type === CommitAppointmentType.Changed) {
-      commitChanges({ [type]: appointment });
     } else {
       commitChanges({ [type]: appointment });
     }
