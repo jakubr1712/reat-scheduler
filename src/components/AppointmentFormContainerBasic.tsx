@@ -96,7 +96,7 @@ function AppointmentFormContainerBasic({
         });
       } else {
         console.error(
-          `Nieprawidłowy typ danych dla pola ${field}: ${typeof dateValue}`
+          `Invalid data type for field ${field}: ${typeof dateValue}`
         );
       }
     },
@@ -134,20 +134,18 @@ function AppointmentFormContainerBasic({
         <div className={classes.content}>
           <div className={classes.wrapper}>
             <Create className={classes.icon} color="action" />
-            <TextField {...textEditorProps("title")} label="Tytuł" />
+            <TextField {...textEditorProps("title")} />
           </div>
           <div className={classes.wrapper}>
             <CalendarToday className={classes.icon} color="action" />
             <LocalizationProvider dateAdapter={AdapterMoment}>
               <DateTimePicker
-                label="Start"
                 renderInput={(props) => (
                   <TextField className={classes.picker} {...props} />
                 )}
                 {...startDatePickerProps}
               />
               <DateTimePicker
-                label="Koniec"
                 renderInput={(props) => (
                   <TextField className={classes.picker} {...props} />
                 )}
@@ -157,16 +155,11 @@ function AppointmentFormContainerBasic({
           </div>
           <div className={classes.wrapper}>
             <LocationOn className={classes.icon} color="action" />
-            <TextField {...textEditorProps("location")} label="Lokalizacja" />
+            <TextField {...textEditorProps("location")} />
           </div>
           <div className={classes.wrapper}>
             <Notes className={classes.icon} color="action" />
-            <TextField
-              {...textEditorProps("notes")}
-              label="Notatka"
-              multiline
-              rows={6}
-            />
+            <TextField {...textEditorProps("notes")} multiline rows={6} />
           </div>
         </div>
         <div className={classes.buttonGroup}>
@@ -180,7 +173,7 @@ function AppointmentFormContainerBasic({
                 commitAppointment(CommitAppointmentType.Deleted);
               }}
             >
-              Usuń
+              Delete
             </Button>
           )}
           <Button
@@ -192,7 +185,7 @@ function AppointmentFormContainerBasic({
               applyChanges();
             }}
           >
-            {isNewAppointment ? "Stwórz" : "Zapisz"}
+            {isNewAppointment ? "Create" : "Save"}
           </Button>
         </div>
       </StyledDiv>

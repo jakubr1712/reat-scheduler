@@ -47,7 +47,7 @@ function SchedulerApp() {
     onSuccess: () => queryClient.invalidateQueries("appointments"),
     onError: (error) => {
       console.error("Failed to add appointment:", error);
-      alert("Nie udało się dodać spotkania. Spróbuj ponownie.");
+      alert("Failed to add meeting. Please try again.");
     },
   });
 
@@ -55,7 +55,7 @@ function SchedulerApp() {
     onSuccess: () => queryClient.invalidateQueries("appointments"),
     onError: (error) => {
       console.error("Failed to update appointment:", error);
-      alert("Nie udało się zaktualizować spotkania. Spróbuj ponownie.");
+      alert("Failed to update meeting. Please try again.");
     },
   });
 
@@ -63,7 +63,7 @@ function SchedulerApp() {
     onSuccess: () => queryClient.invalidateQueries("appointments"),
     onError: (error) => {
       console.error("Failed to delete appointment:", error);
-      alert("Nie udało się usunąć spotkania. Spróbuj ponownie.");
+      alert("Failed to delete meeting. Please try again.");
     },
   });
 
@@ -161,11 +161,11 @@ function SchedulerApp() {
   );
 
   if (isLoading) {
-    return <div>Ładowanie...</div>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Błąd podczas ładowania wydarzeń.</div>;
+    return <div>Error while loading events.</div>;
   }
 
   const startDate = new Date(currentDate);
@@ -176,29 +176,17 @@ function SchedulerApp() {
 
   return (
     <Paper>
-      <Scheduler data={appointmentsData || []} height={660} locale={"pl-PL"}>
+      <Scheduler data={appointmentsData || []} height={660}>
         <ViewState defaultCurrentDate={currentDate} />
         <EditingState
           onCommitChanges={commitChanges}
           onEditingAppointmentChange={onEditingAppointmentChange}
           onAddedAppointmentChange={onAddedAppointmentChange}
         />
-        <DayView
-          startDayHour={startDayHour}
-          endDayHour={endDayHour}
-          displayName="Dzień"
-        />
-        <WeekView
-          startDayHour={startDayHour}
-          endDayHour={endDayHour}
-          displayName="Tydzień"
-        />
-        <MonthView displayName="Miesiąc" />
-        <AllDayPanel
-          messages={{
-            allDay: "Cały dzień",
-          }}
-        />
+        <DayView startDayHour={startDayHour} endDayHour={endDayHour} />
+        <WeekView startDayHour={startDayHour} endDayHour={endDayHour} />
+        <MonthView />
+        <AllDayPanel />
         <EditRecurrenceMenu />
         <Appointments />
         <AppointmentTooltip showOpenButton showCloseButton showDeleteButton />
